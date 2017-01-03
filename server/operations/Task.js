@@ -3,7 +3,7 @@ const Task = require('../models/Task');
 exports.findAll = (socket) => {
   console.log('findAll run');
 
-  Task.find({}, (err, tasks) => {
+  Task.find({}).sort({done: 'asc', priority: 'desc'}).exec((err, tasks) => {
     if (!err) {
       //TODO: do it correctly
       socket.emit('all Tasks', tasks);
