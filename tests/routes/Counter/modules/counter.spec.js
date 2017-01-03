@@ -3,10 +3,10 @@ import {
   increment,
   doubleAsync,
   default as counterReducer
-} from 'routes/Counter/modules/counter'
+} from 'routes/Tasks/modules/counter'
 
-describe('(Redux Module) Counter', () => {
-  it('Should export a constant COUNTER_INCREMENT.', () => {
+describe('(Redux Module) Tasks', () => {
+  it('Should export a constant TASKS_INCREMENT.', () => {
     expect(COUNTER_INCREMENT).to.equal('COUNTER_INCREMENT')
   })
 
@@ -31,12 +31,12 @@ describe('(Redux Module) Counter', () => {
     })
   })
 
-  describe('(Action Creator) increment', () => {
+  describe('(Action Creator) tasks_increment', () => {
     it('Should be exported as a function.', () => {
       expect(increment).to.be.a('function')
     })
 
-    it('Should return an action with type "COUNTER_INCREMENT".', () => {
+    it('Should return an action with type "TASKS_INCREMENT".', () => {
       expect(increment()).to.have.property('type', COUNTER_INCREMENT)
     })
 
@@ -49,7 +49,7 @@ describe('(Redux Module) Counter', () => {
     })
   })
 
-  describe('(Action Creator) doubleAsync', () => {
+  describe('(Action Creator) tasks_doubleAsync', () => {
     let _globalState
     let _dispatchSpy
     let _getStateSpy
@@ -110,8 +110,8 @@ describe('(Redux Module) Counter', () => {
   // NOTE: if you have a more complex state, you will probably want to verify
   // that you did not mutate the state. In this case our state is just a number
   // (which cannot be mutated).
-  describe('(Action Handler) COUNTER_INCREMENT', () => {
-    it('Should increment the state by the action payload\'s "value" property.', () => {
+  describe('(Action Handler) TASKS_INCREMENT', () => {
+    it('Should tasks_increment the state by the action payload\'s "value" property.', () => {
       let state = counterReducer(undefined, {})
       expect(state).to.equal(0)
       state = counterReducer(state, increment(1))

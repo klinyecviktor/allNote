@@ -1,9 +1,9 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
-import { Counter } from 'routes/Counter/components/Counter'
+import { Counter } from 'routes/Tasks/components/Tasks'
 import { shallow } from 'enzyme'
 
-describe('(Component) Counter', () => {
+describe('(Component) Tasks', () => {
   let _props, _spies, _wrapper
 
   beforeEach(() => {
@@ -11,8 +11,8 @@ describe('(Component) Counter', () => {
     _props = {
       counter : 5,
       ...bindActionCreators({
-        doubleAsync : (_spies.doubleAsync = sinon.spy()),
-        increment   : (_spies.increment = sinon.spy())
+        tasks_doubleAsync : (_spies.tasks_doubleAsync = sinon.spy()),
+        tasks_increment   : (_spies.tasks_increment = sinon.spy())
       }, _spies.dispatch = sinon.spy())
     }
     _wrapper = shallow(<Counter {..._props} />)
@@ -22,7 +22,7 @@ describe('(Component) Counter', () => {
     expect(_wrapper.is('div')).to.equal(true)
   })
 
-  it('Should render with an <h2> that includes Sample Counter text.', () => {
+  it('Should render with an <h2> that includes Sample Tasks text.', () => {
     expect(_wrapper.find('h2').text()).to.match(/Counter:/)
   })
 
@@ -36,7 +36,7 @@ describe('(Component) Counter', () => {
     expect(_wrapper.find('button')).to.have.length(2)
   })
 
-  describe('An increment button...', () => {
+  describe('An tasks_increment button...', () => {
     let _button
 
     beforeEach(() => {
@@ -47,13 +47,13 @@ describe('(Component) Counter', () => {
       expect(_button.hasClass('btn btn-default')).to.be.true
     })
 
-    it('Should dispatch a `increment` action when clicked', () => {
+    it('Should dispatch a `tasks_increment` action when clicked', () => {
       _spies.dispatch.should.have.not.been.called
 
       _button.simulate('click')
 
       _spies.dispatch.should.have.been.called
-      _spies.increment.should.have.been.called
+      _spies.tasks_increment.should.have.been.called
     })
   })
 
@@ -68,13 +68,13 @@ describe('(Component) Counter', () => {
       expect(_button.hasClass('btn btn-default')).to.be.true
     })
 
-    it('Should dispatch a `doubleAsync` action when clicked', () => {
+    it('Should dispatch a `tasks_doubleAsync` action when clicked', () => {
       _spies.dispatch.should.have.not.been.called
 
       _button.simulate('click')
 
       _spies.dispatch.should.have.been.called
-      _spies.doubleAsync.should.have.been.called
+      _spies.tasks_doubleAsync.should.have.been.called
     })
   })
 })

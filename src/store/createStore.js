@@ -1,5 +1,6 @@
 import { applyMiddleware, compose, createStore } from 'redux'
 import thunk from 'redux-thunk'
+import startSocket, {socketMiddleware} from './socketMiddleware'
 import { browserHistory } from 'react-router'
 import makeRootReducer from './reducers'
 import { updateLocation } from './location'
@@ -8,7 +9,7 @@ export default (initialState = {}) => {
   // ======================================================
   // Middleware Configuration
   // ======================================================
-  const middleware = [thunk]
+  const middleware = [thunk, socketMiddleware]
 
   // ======================================================
   // Store Enhancers
@@ -46,6 +47,11 @@ export default (initialState = {}) => {
       store.replaceReducer(reducers(store.asyncReducers))
     })
   }
+
+  // ======================================================
+  // Starting dispatching on socket events
+  // ======================================================
+  startSocket(store);
 
   return store
 }
